@@ -1,0 +1,32 @@
+.row {
+  --bs-gutter-x: 1.5rem;
+  --bs-gutter-y: 0;
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -15px;
+  margin-left: -15px;
+  margin-top: calc(-1 * var(--bs-gutter-y));
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+@media (min-width:1200px) {
+  .py-xl-5 {
+    padding-top: 1rem!important;
+    padding-bottom: 1rem!important;
+  }
+}
+
+.bg-dark {
+  --bs-bg-opacity: 1;
+  background-color: rgba(var(--bs-dark-rgb),var(--bs-bg-opacity))!important;
+}
+
+@media (min-width:992px) {
+  .mb-lg-0 {
+    /*margin-bottom: 0!important;*/
+  }
+}
+
