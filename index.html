@@ -1,22 +1,105 @@
 <!DOCTYPE html>
-<html data-bs-theme="light" lang="en">
+<html data-bs-theme="auto" lang="en">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>Gloria D'ville International School</title>
+    <script>
+        (function() {
+
+            // JavaScript snippet handling Dark/Light mode switching
+
+            const getStoredTheme = () => localStorage.getItem('theme');
+            const setStoredTheme = theme => localStorage.setItem('theme', theme);
+            const forcedTheme = document.documentElement.getAttribute('data-bss-forced-theme');
+
+            const getPreferredTheme = () => {
+
+                if (forcedTheme) return forcedTheme;
+
+                const storedTheme = getStoredTheme();
+                if (storedTheme) {
+                    return storedTheme;
+                }
+
+                const pageTheme = document.documentElement.getAttribute('data-bs-theme');
+
+                if (pageTheme) {
+                    return pageTheme;
+                }
+
+                return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+            }
+
+            const setTheme = theme => {
+                if (theme === 'auto' && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                    document.documentElement.setAttribute('data-bs-theme', 'dark');
+                } else {
+                    document.documentElement.setAttribute('data-bs-theme', theme);
+                }
+            }
+
+            setTheme(getPreferredTheme());
+
+            const showActiveTheme = (theme, focus = false) => {
+                const themeSwitchers = [].slice.call(document.querySelectorAll('.theme-switcher'));
+
+                if (!themeSwitchers.length) return;
+
+                document.querySelectorAll('[data-bs-theme-value]').forEach(element => {
+                    element.classList.remove('active');
+                    element.setAttribute('aria-pressed', 'false');
+                });
+
+                for (const themeSwitcher of themeSwitchers) {
+
+                    const btnToActivate = themeSwitcher.querySelector('[data-bs-theme-value="' + theme + '"]');
+
+                    if (btnToActivate) {
+                        btnToActivate.classList.add('active');
+                        btnToActivate.setAttribute('aria-pressed', 'true');
+                    }
+                }
+            }
+
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+                const storedTheme = getStoredTheme();
+                if (storedTheme !== 'light' && storedTheme !== 'dark') {
+                    setTheme(getPreferredTheme());
+                }
+            });
+
+            window.addEventListener('DOMContentLoaded', () => {
+                showActiveTheme(getPreferredTheme());
+
+                document.querySelectorAll('[data-bs-theme-value]')
+                    .forEach(toggle => {
+                        toggle.addEventListener('click', (e) => {
+                            e.preventDefault();
+                            const theme = toggle.getAttribute('data-bs-theme-value');
+                            setStoredTheme(theme);
+                            setTheme(theme);
+                            showActiveTheme(theme);
+                        })
+                    })
+            });
+        })();
+    </script>
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="manifest" href="manifest.json" crossorigin="use-credentials">
     <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
     <link rel="stylesheet" href="assets/fonts/line-awesome.min.css">
+    <link rel="stylesheet" href="assets/fonts/material-icons.min.css">
     <link rel="stylesheet" href="assets/css/Hero-Carousel-images.css">
     <link rel="stylesheet" href="assets/css/Navbar-Right-Links-Dark-icons.css">
     <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 
 <body style="backdrop-filter: opacity(1);">
-    <nav class="navbar navbar-expand-md sticky-top bg-dark py-3" data-bs-theme="dark" style="--bs-dark: #000080;--bs-dark-rgb: 0,0,128;">
-        <div class="container"><a class="navbar-brand d-flex align-items-center" href="#"><span><img src="assets/img/Glori%20dville%20logo.png" style="width: 65px;" width="65" height="45">&nbsp;Gloria D'ville International School</span></a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-5"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
-            <div class="collapse navbar-collapse" id="navcol-5">
+    <nav class="navbar navbar-expand-md sticky-top py-3" style="--bs-dark: #052c650;--bs-dark-rgb: 0,0,128;background: rgb(5,44,101);" data-bs-theme="dark">
+        <div class="container"><a class="navbar-brand d-flex align-items-center" href="#"><span><img src="assets/img/Glori%20dville%20logo.png" style="width: 65px;" width="65" height="45">&nbsp;Gloria D'ville International School</span></a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-3"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navcol-3">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
@@ -83,13 +166,13 @@
             <div class="col-md-12 col-lg-11 col-xl-12 text-center mx-auto" style="margin-bottom: -33px;background: var(--bs-primary-text-emphasis);">
                 <h2 class="text-center text-white" style="margin-bottom: 12px;margin-top: 17px;">Empower Your Child’s Potential&nbsp;</h2>
                 <h3 class="text-center text-white"><em><span style="color: rgb(89, 154, 251);">Cultivate Character, Competence, and Creativity at Gloria D’ville International School</span></em></h3>
-                <p class="fs-5 w-lg-50" style="text-align: left;">Nestled just moments away from the University of Port Harcourt, lies Gloria D'ville International School, a vibrant learning haven where your child's potential takes flight. Our mission? To nurture well-rounded leaders of tomorrow – grounded in integrity, equipped with competence, and empowered by creativity.&nbsp;Beyond textbooks and exams, we cultivate a dynamic environment that prioritizes your child's well being</p>
+                <p class="fs-5 w-lg-50" style="text-align: left;">Nestled just moments away from the University of Port Harcourt, lies Gloria D'ville International School, a vibrant learning haven where your child's potential takes flight. Our mission? To nurture well-rounded leaders of tomorrow – grounded in integrity, equipped with competence, and empowered by creativity.&nbsp;Beyond textbooks and exams, we cultivate a dynamic environment that prioritizes your child's well being.</p>
             </div>
         </div>
         <div class="row gy-4 row-cols-1 row-cols-md-2 row-cols-xl-3">
             <div class="col">
                 <div class="d-flex">
-                    <div class="bs-icon-sm bs-icon-rounded bs-icon-semi-white text-primary d-flex flex-shrink-0 justify-content-center align-items-center d-inline-block mb-3 bs-icon"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 20 20" fill="none">
+                    <div class="bs-icon-sm bs-icon-rounded bs-icon-semi-white text-primary d-flex flex-shrink-0 justify-content-center align-items-center d-inline-block mb-3 bs-icon"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 20 20" fill="none" style="font-size: 33px;">
                             <path d="M2 11C2 10.4477 2.44772 10 3 10H5C5.55228 10 6 10.4477 6 11V16C6 16.5523 5.55228 17 5 17H3C2.44772 17 2 16.5523 2 16V11Z" fill="currentColor"></path>
                             <path d="M8 7C8 6.44772 8.44772 6 9 6H11C11.5523 6 12 6.44772 12 7V16C12 16.5523 11.5523 17 11 17H9C8.44772 17 8 16.5523 8 16V7Z" fill="currentColor"></path>
                             <path d="M14 4C14 3.44772 14.4477 3 15 3H17C17.5523 3 18 3.44772 18 4V16C18 16.5523 17.5523 17 17 17H15C14.4477 17 14 16.5523 14 16V4Z" fill="currentColor"></path>
@@ -102,12 +185,9 @@
             </div>
             <div class="col">
                 <div class="d-flex">
-                    <div class="bs-icon-sm bs-icon-rounded bs-icon-semi-white text-primary d-flex flex-shrink-0 justify-content-center align-items-center d-inline-block mb-3 bs-icon"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none">
-                            <path d="M6 6C6 5.44772 6.44772 5 7 5H17C17.5523 5 18 5.44772 18 6C18 6.55228 17.5523 7 17 7H7C6.44771 7 6 6.55228 6 6Z" fill="currentColor"></path>
-                            <path d="M6 10C6 9.44771 6.44772 9 7 9H17C17.5523 9 18 9.44771 18 10C18 10.5523 17.5523 11 17 11H7C6.44771 11 6 10.5523 6 10Z" fill="currentColor"></path>
-                            <path d="M7 13C6.44772 13 6 13.4477 6 14C6 14.5523 6.44771 15 7 15H17C17.5523 15 18 14.5523 18 14C18 13.4477 17.5523 13 17 13H7Z" fill="currentColor"></path>
-                            <path d="M6 18C6 17.4477 6.44772 17 7 17H11C11.5523 17 12 17.4477 12 18C12 18.5523 11.5523 19 11 19H7C6.44772 19 6 18.5523 6 18Z" fill="currentColor"></path>
-                            <path fill-rule="evenodd" clip-rule="evenodd" d="M2 4C2 2.34315 3.34315 1 5 1H19C20.6569 1 22 2.34315 22 4V20C22 21.6569 20.6569 23 19 23H5C3.34315 23 2 21.6569 2 20V4ZM5 3H19C19.5523 3 20 3.44771 20 4V20C20 20.5523 19.5523 21 19 21H5C4.44772 21 4 20.5523 4 20V4C4 3.44772 4.44771 3 5 3Z" fill="currentColor"></path>
+                    <div class="bs-icon-sm bs-icon-rounded bs-icon-semi-white text-primary d-flex flex-shrink-0 justify-content-center align-items-center d-inline-block mb-3 bs-icon"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-mortarboard-fill" style="font-size: 102px;">
+                            <path d="M8.211 2.047a.5.5 0 0 0-.422 0l-7.5 3.5a.5.5 0 0 0 .025.917l7.5 3a.5.5 0 0 0 .372 0L14 7.14V13a1 1 0 0 0-1 1v2h3v-2a1 1 0 0 0-1-1V6.739l.686-.275a.5.5 0 0 0 .025-.917l-7.5-3.5Z"></path>
+                            <path d="M4.176 9.032a.5.5 0 0 0-.656.327l-.5 1.7a.5.5 0 0 0 .294.605l4.5 1.8a.5.5 0 0 0 .372 0l4.5-1.8a.5.5 0 0 0 .294-.605l-.5-1.7a.5.5 0 0 0-.656-.327L8 10.466z"></path>
                         </svg></div>
                     <div class="px-3">
                         <h4 class="text-white">Value-based Education</h4>
@@ -117,8 +197,8 @@
             </div>
             <div class="col">
                 <div class="d-flex">
-                    <div class="bs-icon-sm bs-icon-rounded bs-icon-semi-white text-primary d-flex flex-shrink-0 justify-content-center align-items-center d-inline-block mb-3 bs-icon"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-hammer">
-                            <path d="M9.972 2.508a.5.5 0 0 0-.16-.556l-.178-.129a5.009 5.009 0 0 0-2.076-.783C6.215.862 4.504 1.229 2.84 3.133H1.786a.5.5 0 0 0-.354.147L.146 4.567a.5.5 0 0 0 0 .706l2.571 2.579a.5.5 0 0 0 .708 0l1.286-1.29a.5.5 0 0 0 .146-.353V5.57l8.387 8.873A.5.5 0 0 0 14 14.5l1.5-1.5a.5.5 0 0 0 .017-.689l-9.129-8.63c.747-.456 1.772-.839 3.112-.839a.5.5 0 0 0 .472-.334z"></path>
+                    <div class="bs-icon-sm bs-icon-rounded bs-icon-semi-white text-primary d-flex flex-shrink-0 justify-content-center align-items-center d-inline-block mb-3 bs-icon"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-tools" style="font-size: 40px;">
+                            <path d="M1 0 0 1l2.2 3.081a1 1 0 0 0 .815.419h.07a1 1 0 0 1 .708.293l2.675 2.675-2.617 2.654A3.003 3.003 0 0 0 0 13a3 3 0 1 0 5.878-.851l2.654-2.617.968.968-.305.914a1 1 0 0 0 .242 1.023l3.27 3.27a.997.997 0 0 0 1.414 0l1.586-1.586a.997.997 0 0 0 0-1.414l-3.27-3.27a1 1 0 0 0-1.023-.242L10.5 9.5l-.96-.96 2.68-2.643A3.005 3.005 0 0 0 16 3c0-.269-.035-.53-.102-.777l-2.14 2.141L12 4l-.364-1.757L13.777.102a3 3 0 0 0-3.675 3.68L7.462 6.46 4.793 3.793a1 1 0 0 1-.293-.707v-.071a1 1 0 0 0-.419-.814zm9.646 10.646a.5.5 0 0 1 .708 0l2.914 2.915a.5.5 0 0 1-.707.707l-2.915-2.914a.5.5 0 0 1 0-.708M3 11l.471.242.529.026.287.445.445.287.026.529L5 13l-.242.471-.026.529-.445.287-.287.445-.529.026L3 15l-.471-.242L2 14.732l-.287-.445L1.268 14l-.026-.529L1 13l.242-.471.026-.529.445-.287.287-.445.529-.026z"></path>
                         </svg></div>
                     <div class="px-3">
                         <h4 class="text-white">Hands-on Skills</h4>
@@ -128,8 +208,8 @@
             </div>
             <div class="col">
                 <div class="d-flex">
-                    <div class="bs-icon-sm bs-icon-rounded bs-icon-semi-white text-primary d-flex flex-shrink-0 justify-content-center align-items-center d-inline-block mb-3 bs-icon"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 20 20" fill="none">
-                            <path fill-rule="evenodd" clip-rule="evenodd" d="M18 3C18 2.65342 17.8205 2.33156 17.5257 2.14935C17.2309 1.96714 16.8628 1.95058 16.5528 2.10557L8.76393 6H5C3.34315 6 2 7.34315 2 9C2 10.6569 3.34315 12 5 12H5.27925L7.05132 17.3162C7.18744 17.7246 7.56958 18 8.00001 18H9.00001C9.55229 18 10 17.5523 10 17V12.618L16.5528 15.8944C16.8628 16.0494 17.2309 16.0329 17.5257 15.8507C17.8205 15.6684 18 15.3466 18 15V3Z" fill="currentColor"></path>
+                    <div class="bs-icon-sm bs-icon-rounded bs-icon-semi-white text-primary d-flex flex-shrink-0 justify-content-center align-items-center d-inline-block mb-3 bs-icon"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-people-fill" style="font-size: 32px;">
+                            <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6m-5.784 6A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1zM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5"></path>
                         </svg></div>
                     <div class="px-3">
                         <h4 class="text-white">Personalized Guidance and Counseling</h4>
@@ -139,13 +219,9 @@
             </div>
             <div class="col">
                 <div class="d-flex">
-                    <div class="bs-icon-sm bs-icon-rounded bs-icon-semi-white text-primary d-flex flex-shrink-0 justify-content-center align-items-center d-inline-block mb-3 bs-icon"><svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="1em" viewBox="0 0 24 24" width="1em" fill="currentColor">
-                            <g>
-                                <rect fill="none" height="24" width="24"></rect>
-                            </g>
-                            <g>
-                                <path d="M12,2L4,5v6.09c0,5.05,3.41,9.76,8,10.91c4.59-1.15,8-5.86,8-10.91V5L12,2z M12,17c-2.76,0-5-2.24-5-5s2.24-5,5-5 s5,2.24,5,5S14.76,17,12,17z M13.65,14.35l-2.15-2.15V9h1v2.79l1.85,1.85L13.65,14.35z"></path>
-                            </g>
+                    <div class="bs-icon-sm bs-icon-rounded bs-icon-semi-white text-primary d-flex flex-shrink-0 justify-content-center align-items-center d-inline-block mb-3 bs-icon"><svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="1em" viewBox="0 0 24 24" width="1em" fill="currentColor" style="font-size: 59px;">
+                            <rect fill="none" height="24" width="24"></rect>
+                            <path d="M10.5,13H8v-3h2.5V7.5h3V10H16v3h-2.5v2.5h-3V13z M12,2L4,5v6.09c0,5.05,3.41,9.76,8,10.91c4.59-1.15,8-5.86,8-10.91V5L12,2 z"></path>
                         </svg></div>
                     <div class="px-3">
                         <h4 class="text-white">Safety and Security</h4>
@@ -155,23 +231,23 @@
             </div>
             <div class="col">
                 <div class="d-flex">
-                    <div class="bs-icon-sm bs-icon-rounded bs-icon-semi-white text-primary d-flex flex-shrink-0 justify-content-center align-items-center d-inline-block mb-3 bs-icon"><i class="la la-hand-peace-o" style="font-size: 23px;"></i></div>
+                    <div class="bs-icon-sm bs-icon-rounded bs-icon-semi-white text-primary d-flex flex-shrink-0 justify-content-center align-items-center d-inline-block mb-3 bs-icon"><i class="la la-hand-peace-o" style="font-size: 36px;"></i></div>
                     <div class="px-3">
-                        <h4 class="text-white">Conducive nad Convenient</h4>
+                        <h4 class="text-white">Conducive and Convenient</h4>
                         <p>Eensuring a rich and interactive learning experience in a stimulating environment with pipe-borne water, standby generator, sports areas, and a music lab.</p>
                     </div>
                 </div>
             </div>
         </div>
         <div class="col-md-12 col-lg-11 col-xl-12 text-center mx-auto" style="margin-bottom: -33px;background: var(--bs-primary-text-emphasis);">
-            <section class="py-4 py-xl-5" style="margin-bottom: -166px;">
+            <section class="py-4 py-xl-5" style="padding: 5px;margin: 0px;margin-top: 0px;margin-bottom: -155px;">
                 <div class="container">
                     <div class="text-white bg-primary border rounded border-0 border-primary d-flex flex-column justify-content-between flex-lg-row p-4 p-md-5" style="background: linear-gradient(89deg, #520ee3, #f93333);">
                         <div class="pb-2 pb-lg-1">
                             <h2 class="fw-bold mb-2" style="font-size: 38px;">Contact us today and schedule a meeting&nbsp;</h2>
                             <p class="mb-0" style="font-size: 23px;">&nbsp;Discover the Gloria D'ville International School difference, where integrity, competence, and creativity ignite a passion for lifelong learning.</p>
                         </div>
-                        <div class="my-2"><a class="btn btn-primary fs-5 d-block py-2 px-4" role="button" href="#" target="_top" rel="noreferrer">Contact</a></div>
+                        <div class="my-2"><a class="btn btn-outline-light fs-5 d-block py-2 px-4" role="button" href="#">Schedule</a></div>
                     </div>
                 </div>
             </section>
@@ -220,7 +296,7 @@
         <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3">
             <div class="col">
                 <div class="d-flex p-3">
-                    <div class="bs-icon-sm bs-icon-rounded bs-icon-primary d-flex flex-shrink-0 justify-content-center align-items-center d-inline-block bs-icon sm"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-arrow-guide">
+                    <div class="bs-icon-sm bs-icon-rounded bs-icon-primary d-flex flex-shrink-0 justify-content-center align-items-center d-inline-block bs-icon sm"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-arrow-guide" style="font-size: 28px;">
                             <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                             <path d="M5 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"></path>
                             <path d="M7 19h3a2 2 0 0 0 2 -2v-8a2 2 0 0 1 2 -2h7"></path>
@@ -233,7 +309,7 @@
             </div>
             <div class="col">
                 <div class="d-flex p-3">
-                    <div class="bs-icon-sm bs-icon-rounded bs-icon-primary d-flex flex-shrink-0 justify-content-center align-items-center d-inline-block bs-icon sm"><svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="1em" viewBox="0 0 24 24" width="1em" fill="currentColor">
+                    <div class="bs-icon-sm bs-icon-rounded bs-icon-primary d-flex flex-shrink-0 justify-content-center align-items-center d-inline-block bs-icon sm"><svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="1em" viewBox="0 0 24 24" width="1em" fill="currentColor" style="font-size: 28px;">
                             <g>
                                 <rect fill="none" height="24" width="24"></rect>
                             </g>
@@ -273,18 +349,18 @@
             </div>
             <div class="col">
                 <div class="d-flex p-3">
-                    <div class="bs-icon-sm bs-icon-rounded bs-icon-primary d-flex flex-shrink-0 justify-content-center align-items-center d-inline-block bs-icon sm"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-box-arrow-up-right">
+                    <div class="bs-icon-sm bs-icon-rounded bs-icon-primary d-flex flex-shrink-0 justify-content-center align-items-center d-inline-block bs-icon sm"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-box-arrow-up-right" style="font-size: 22px;">
                             <path fill-rule="evenodd" d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5"></path>
                             <path fill-rule="evenodd" d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0z"></path>
                         </svg></div>
                     <div class="px-2">
-                        <h5 class="mb-0 mt-1">Extracurricular Activities</h5>
+                        <h5 class="mb-0 mt-1">Co-curricular Activities</h5>
                     </div>
                 </div>
             </div>
             <div class="col">
                 <div class="d-flex p-3">
-                    <div class="bs-icon-sm bs-icon-rounded bs-icon-primary d-flex flex-shrink-0 justify-content-center align-items-center d-inline-block bs-icon sm"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-social">
+                    <div class="bs-icon-sm bs-icon-rounded bs-icon-primary d-flex flex-shrink-0 justify-content-center align-items-center d-inline-block bs-icon sm"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-social" style="font-size: 29px;">
                             <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                             <path d="M12 5m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"></path>
                             <path d="M5 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"></path>
@@ -301,7 +377,7 @@
             </div>
             <div class="col">
                 <div class="d-flex p-3">
-                    <div class="bs-icon-sm bs-icon-rounded bs-icon-primary d-flex flex-shrink-0 justify-content-center align-items-center d-inline-block bs-icon sm"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-database-search">
+                    <div class="bs-icon-sm bs-icon-rounded bs-icon-primary d-flex flex-shrink-0 justify-content-center align-items-center d-inline-block bs-icon sm"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-database-search" style="font-size: 28px;">
                             <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                             <path d="M4 6c0 1.657 3.582 3 8 3s8 -1.343 8 -3s-3.582 -3 -8 -3s-8 1.343 -8 3"></path>
                             <path d="M4 6v6c0 1.657 3.582 3 8 3m8 -3.5v-5.5"></path>
@@ -317,7 +393,7 @@
             </div>
             <div class="col">
                 <div class="d-flex p-3">
-                    <div class="bs-icon-sm bs-icon-rounded bs-icon-primary d-flex flex-shrink-0 justify-content-center align-items-center d-inline-block bs-icon sm"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-people-fill">
+                    <div class="bs-icon-sm bs-icon-rounded bs-icon-primary d-flex flex-shrink-0 justify-content-center align-items-center d-inline-block bs-icon sm"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-people-fill" style="font-size: 25px;">
                             <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6m-5.784 6A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1zM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5"></path>
                         </svg></div>
                     <div class="px-2">
@@ -328,40 +404,6 @@
         </div>
         <div class="d-xxl-flex justify-content-xxl-center" style="padding: 0px 0px 0px;padding-top: 20px;padding-bottom: 20px;text-align: center;"><a class="btn btn-primary d-xxl-flex" role="button" href="about.html">Learn More</a></div>
     </div>
-    <div class="container-fluid pt-5">
-        <div class="text-center pb-2" style="padding-right: 12px;padding-left: 12px;padding-bottom: 0px;">
-            <p class="section-title px-5"><span class="px-2">Popular Classes</span></p>
-            <h1 class="mb-4">Classes for Your Kids</h1>
-        </div>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-4 mb-5">
-                    <div class="card bg-light border-0 shadow-sm pb-2"><img class="card-img-top w-100 d-block card-img-top mb-2" src="assets/img/class-1.jpg" alt="">
-                        <div class="card-body text-center">
-                            <h4 class="card-title">Drawing Class</h4>
-                            <p class="card-text">Justo ea diam stet diam ipsum no sit, ipsum vero et et diam ipsum duo et no et, ipsum ipsum erat duo amet clita duo</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 mb-5">
-                    <div class="card bg-light border-0 shadow-sm pb-2"><img class="card-img-top w-100 d-block card-img-top mb-2" src="assets/img/class-2.jpg" alt="">
-                        <div class="card-body text-center">
-                            <h4 class="card-title">Language Learning</h4>
-                            <p class="card-text">Justo ea diam stet diam ipsum no sit, ipsum vero et et diam ipsum duo et no et, ipsum ipsum erat duo amet clita duo</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 mb-5">
-                    <div class="card bg-light border-0 shadow-sm pb-2"><img class="card-img-top w-100 d-block card-img-top mb-2" src="assets/img/class-3.jpg" alt="">
-                        <div class="card-body text-center">
-                            <h4 class="card-title">Basic Science</h4>
-                            <p class="card-text">Justo ea diam stet diam ipsum no sit, ipsum vero et et diam ipsum duo et no et, ipsum ipsum erat duo amet clita duo</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
     <div class="container-fluid py-5" style="text-align: center;filter: blur(0px);">
         <div class="container">
             <div class="row align-items-center" style="text-align: center;margin-top: -43px;">
@@ -370,9 +412,9 @@
                     <h2 class="mb-4" style="text-align: center;">Enroll Your Child/Ward Today!</h2>
                     <p style="text-align: left;margin-top: -21px;font-size: 16px;">At our esteemed institution, we nurture dreams and build futures. We offer a comprehensive educational experience, designed to instill knowledge, values, and skills essential for holistic development.<br><br><strong>Why Choose Us?</strong></p>
                     <ul class="list-inline m-0">
-                        <li class="list-inline-item py-2" style="text-align: left;margin-top: -15px;"><i class="fa fa-check text-success mr-3" style="text-align: left;margin-top: -15px;"></i>&nbsp;<strong>Quality Education:</strong> Our curriculum is enriched with modern learning resources to ensure your child receives a well-rounded education.</li>
-                        <li class="list-inline-item py-2" style="text-align: left;margin-top: -15px;"><i class="fa fa-check text-success mr-3" style="text-align: left;margin-top: -15px;"></i>&nbsp;<strong>Experienced Educators:</strong> Our team of dedicated professionals is committed to nurturing your child’s intellectual and moral growth.</li>
-                        <li class="list-inline-item py-2" style="text-align: left;margin-top: -15px;"><i class="fa fa-check text-success mr-3"></i>&nbsp;<strong>Innovative Learning Environment:</strong> We blend traditional and modern learning techniques to provide a balanced education.</li>
+                        <li class="list-inline-item py-2" style="text-align: left;margin-top: -2px;"><i class="fa fa-check text-success mr-3" style="text-align: left;margin-top: -2px;"></i>&nbsp;<strong>Quality Education:</strong> Our curriculum is enriched with modern learning resources to ensure your child receives a well-rounded education.</li>
+                        <li class="list-inline-item py-2" style="text-align: left;margin-top: -2px;"><i class="fa fa-check text-success mr-3" style="text-align: left;margin-top: -2px;"></i>&nbsp;<strong>Experienced Educators:</strong> Our team of dedicated professionals is committed to nurturing your child’s intellectual and moral growth.</li>
+                        <li class="list-inline-item py-2" style="text-align: left;margin-top: -2px;"><i class="fa fa-check text-success mr-3"></i>&nbsp;<strong>Innovative Learning Environment:</strong> We blend traditional and modern learning techniques to provide a balanced education.</li>
                         <li class="list-inline-item py-2" style="text-align: left;margin-top: -12px;margin-bottom: -34px;"><strong>Register Your Interest! Join us in molding the leaders of tomorrow. Fill out the form to book a seat for your child/ward in our prestigious institution. Let’s work together in shaping the future!</strong></li>
                     </ul>
                     <div class="row">
@@ -381,7 +423,7 @@
                 </div>
                 <div class="col-md-12 col-lg-6 col-xl-6 col-xxl-6" style="padding-bottom: 1px;padding-right: 10px;padding-top: 44px;">
                     <div class="card mb-5">
-                        <div class="card-body p-sm-5" style="background: navy;">
+                        <div class="card-body p-sm-5" style="background: #052c65;">
                             <h2 class="text-center mb-4" style="color: var(--bs-body-bg);font-size: 26px;">Interested ? Schedule a Meeting</h2>
                             <form method="post">
                                 <div class="mb-3"><input class="form-control" type="text" id="name-1" name="name" placeholder="Name"></div>
@@ -395,28 +437,32 @@
             </div>
         </div>
     </div><a class="btn btn-primary p-3 back-to-top" role="button" href="#"><i class="fa fa-angle-double-up"></i></a>
-    <footer style="background: #052c65;color: var(--bs-body-bg);">
+    <footer style="background: #052c65;color: var(--bs-body-bg);margin-top: 0px;">
         <div class="container py-4 py-lg-5" style="--bs-primary: #0d6efd;--bs-primary-rgb: 13,110,253;--bs-secondary: #6c757d;--bs-secondary-rgb: 108,117,125;background: #052c65;">
             <div class="row justify-content-center">
                 <div class="col-sm-4 col-md-3 text-center text-lg-start d-flex flex-column item" style="color: var(--bs-body-bg);">
-                    <h3 class="fs-6" style="font-weight: bold;">Services</h3>
-                    <ul class="list-unstyled">
-                        <li><a class="link-secondary" href="#"><span style="color: rgb(255, 255, 255);">Web design</span></a></li>
-                        <li><a class="link-secondary" href="#" style="color: var(--bs-body-bg);"><span style="color: rgb(255, 255, 255);">Development</span></a></li>
-                        <li><a class="link-secondary" href="#"><span style="color: rgb(255, 255, 255);">Hosting</span></a></li>
-                    </ul>
+                    <h3 class="fs-6" style="font-weight: bold;color: rgb(13,110,253);">Get In Touch</h3>
+                    <p>&nbsp;<i class="fa fa-location-arrow"></i>&nbsp; <strong>Location</strong></p>
+                    <p style="margin-top: -15px;">1 Gloria D'ville Avenue&nbsp;<br>Off UDSS Uniport Road<br>Port Harcourt, Rivers State</p>
+                    <p>&nbsp;<i class="material-icons">email</i>&nbsp; <strong>Email</strong></p>
+                    <p style="margin-top: -15px;">info@gloriadvilleschool.com</p>
+                    <p>&nbsp;<i class="material-icons">phone_in_talk</i>&nbsp; <strong>Phone</strong></p>
+                    <p style="margin-top: -15px;">+234 818 290 4748</p>
                 </div>
                 <div class="col-sm-4 col-md-3 text-center text-lg-start d-flex flex-column item">
-                    <h3 class="fs-6" style="font-weight: bold;">About</h3>
-                    <ul class="list-unstyled">
-                        <li><a class="link-secondary" href="#"><span style="color: rgb(255, 255, 255);">Company</span></a></li>
-                        <li><a class="link-secondary" href="#"><span style="color: rgb(255, 255, 255);">Team</span></a></li>
-                        <li><a class="link-secondary" href="#"><span style="color: rgb(255, 255, 255);">Legacy</span></a></li>
-                    </ul>
+                    <h3 class="fs-6" style="font-weight: bold;color: rgb(13,110,253);">Quick Links</h3>
+                    <h6 style="margin-bottom: 16px;padding-top: 7px;"><a href="index.html"><span style="color: rgb(255, 255, 255);">Home</span></a></h6>
+                    <h6 style="margin-bottom: 16px;padding-top: 7px;"><a href="index.html"><span style="color: rgb(255, 255, 255);">About</span></a></h6>
+                    <h6 style="margin-bottom: 16px;padding-top: 7px;"><a href="#"><span style="color: rgb(255, 255, 255);">Academics</span></a></h6>
+                    <h6 style="margin-bottom: 16px;padding-top: 7px;"><a href="#"><span style="color: rgb(255, 255, 255);">Activities</span></a></h6>
+                    <h6 style="margin-bottom: 16px;padding-top: 7px;"><a href="#"><span style="color: rgb(255, 255, 255);">Admissions</span></a></h6>
+                    <h6 style="margin-bottom: 16px;padding-top: 7px;"><a href="#"><span style="color: rgb(255, 255, 255);">Blog</span></a></h6>
                 </div>
-                <div class="col-lg-3 col-xl-4 text-center text-lg-start d-flex flex-column align-items-center order-first align-items-lg-start order-lg-last item social" style="color: var(--bs-body-bg);"><span style="margin-left: -29px;"><img src="assets/img/Glori%20dville%20logo.png" style="width: 65px;" width="65" height="45">&nbsp;<strong>Gloria D'ville International School</strong></span>
-                    <div class="fw-bold d-flex align-items-center mb-2"></div>
-                    <p class="text-muted copyright" style="margin-left: -22px;"><span style="color: rgba(255, 255, 255, 0.75);">Sem eleifend donec molestie, integer quisque orci aliquam.</span></p>
+                <div class="col-lg-3 col-xl-4 text-center text-lg-start d-flex flex-column align-items-center order-first align-items-lg-start order-lg-last item social" style="color: var(--bs-body-bg);"><span style="margin-left: -16px;"><img src="assets/img/Glori%20dville%20logo.png" style="width: 65px;margin-left: 13px;" width="65" height="45">&nbsp;<strong>Gloria D'ville International School</strong></span>
+                    <p style="padding-right: 3px;">Gloria D’Ville International School is a leading educational institution in Port Harcourt, committed to nurturing and developing every student’s potential. We provide a diverse learning environment that is rooted in values of excellence, innovation, and collaboration.</p>
+                    <p style="padding-right: 3px;">Stay Updated. Subscribe to our newsletter for the latest news, events and offers from Gloria D’ville International School.&nbsp; &nbsp;</p>
+                    <div class="fw-bold d-flex align-items-center mb-2" style="margin-left: 13px;"><button class="btn btn-primary" type="button" style="margin-left: -14px;">Subscribe</button></div>
+                    <p class="text-muted copyright" style="margin-left: 13px;"></p>
                 </div>
             </div>
             <hr>
