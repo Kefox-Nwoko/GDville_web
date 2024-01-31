@@ -5,87 +5,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>Gloria D'ville International School</title>
-    <script>
-        (function() {
-
-            // JavaScript snippet handling Dark/Light mode switching
-
-            const getStoredTheme = () => localStorage.getItem('theme');
-            const setStoredTheme = theme => localStorage.setItem('theme', theme);
-            const forcedTheme = document.documentElement.getAttribute('data-bss-forced-theme');
-
-            const getPreferredTheme = () => {
-
-                if (forcedTheme) return forcedTheme;
-
-                const storedTheme = getStoredTheme();
-                if (storedTheme) {
-                    return storedTheme;
-                }
-
-                const pageTheme = document.documentElement.getAttribute('data-bs-theme');
-
-                if (pageTheme) {
-                    return pageTheme;
-                }
-
-                return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-            }
-
-            const setTheme = theme => {
-                if (theme === 'auto' && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-                    document.documentElement.setAttribute('data-bs-theme', 'dark');
-                } else {
-                    document.documentElement.setAttribute('data-bs-theme', theme);
-                }
-            }
-
-            setTheme(getPreferredTheme());
-
-            const showActiveTheme = (theme, focus = false) => {
-                const themeSwitchers = [].slice.call(document.querySelectorAll('.theme-switcher'));
-
-                if (!themeSwitchers.length) return;
-
-                document.querySelectorAll('[data-bs-theme-value]').forEach(element => {
-                    element.classList.remove('active');
-                    element.setAttribute('aria-pressed', 'false');
-                });
-
-                for (const themeSwitcher of themeSwitchers) {
-
-                    const btnToActivate = themeSwitcher.querySelector('[data-bs-theme-value="' + theme + '"]');
-
-                    if (btnToActivate) {
-                        btnToActivate.classList.add('active');
-                        btnToActivate.setAttribute('aria-pressed', 'true');
-                    }
-                }
-            }
-
-            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
-                const storedTheme = getStoredTheme();
-                if (storedTheme !== 'light' && storedTheme !== 'dark') {
-                    setTheme(getPreferredTheme());
-                }
-            });
-
-            window.addEventListener('DOMContentLoaded', () => {
-                showActiveTheme(getPreferredTheme());
-
-                document.querySelectorAll('[data-bs-theme-value]')
-                    .forEach(toggle => {
-                        toggle.addEventListener('click', (e) => {
-                            e.preventDefault();
-                            const theme = toggle.getAttribute('data-bs-theme-value');
-                            setStoredTheme(theme);
-                            setTheme(theme);
-                            showActiveTheme(theme);
-                        })
-                    })
-            });
-        })();
-    </script>
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="manifest" href="manifest.json" crossorigin="use-credentials">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Coda&amp;display=swap">
@@ -102,14 +21,14 @@
 
 <body style="backdrop-filter: opacity(1);">
     <nav class="navbar navbar-expand-lg sticky-top py-3" style="--bs-dark: #052c650;--bs-dark-rgb: 0,0,128;background: rgb(5,44,101);" data-bs-theme="dark">
-        <div class="container"><img class="img-fluid" src="assets/img/Glori%20dville%20logo.png" style="width: 65px;margin-top: -5px;" width="65" height="45" alt="School Logo"><a class="navbar-brand d-flex align-items-center" href="#"><span style="font-family: Coda, serif;">&nbsp;Gloria D'ville International School</span></a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-3"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+        <div class="container"><img class="img-fluid" src="assets/img/Glori%20dville%20logo.png" style="width: 65px;margin-top: -5px;" width="65" height="45" alt="School Logo"><a class="navbar-brand d-flex align-items-center" href="#"><span style="font-family: Coda, serif;">&nbsp;Gloria D'Ville International School</span></a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-3"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navcol-3" style="font-family: Roboto, sans-serif;">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
                     <li class="nav-item"><a class="nav-link" href="Academics.html">Academics</a></li>
                     <li class="nav-item"><a class="nav-link active" href="#">Activities</a></li>
-                    <li class="nav-item"><a class="nav-link active" href="#">Admissions</a></li>
+                    <li class="nav-item"></li>
                     <li class="nav-item"><a class="nav-link active" href="#">Blog&nbsp;</a></li>
                 </ul>
             </div><a class="btn btn-primary" role="button" style="margin-top: 0px;margin-bottom: 0px;font-family: Coda, serif;">Contact Us</a>
@@ -165,12 +84,12 @@
         <div><a class="carousel-control-prev" href="#carousel-1" role="button" data-bs-slide="prev"><span class="carousel-control-prev-icon"></span><span class="visually-hidden">Previous</span></a><a class="carousel-control-next" href="#carousel-1" role="button" data-bs-slide="next"><span class="carousel-control-next-icon"></span><span class="visually-hidden">Next</span></a></div>
         <div class="carousel-indicators"><button type="button" data-bs-target="#carousel-1" data-bs-slide-to="0" class="active"></button> <button type="button" data-bs-target="#carousel-1" data-bs-slide-to="1"></button> <button type="button" data-bs-target="#carousel-1" data-bs-slide-to="2"></button> <button type="button" data-bs-target="#carousel-1" data-bs-slide-to="3"></button></div>
     </div>
-    <div class="container text-white bg-primary border rounded border-0 p-4 p-lg-5 py-4 py-xl-5" style="--bs-secondary: #6c757d;--bs-secondary-rgb: 108,117,125;--bs-primary: #3d7eb9;--bs-primary-rgb: 61,126,185;margin-top: 18px;margin-bottom: -22px;">
+    <div class="container text-white bg-primary border rounded border-0 p-4 p-lg-5 py-4 py-xl-5" style="--bs-secondary: #6c757d;--bs-secondary-rgb: 108,117,125;--bs-primary: #3d7eb9;--bs-primary-rgb: 61,126,185;margin-top: 18px;margin-bottom: -34px;">
         <div class="row mb-5">
-            <div class="col-md-12 col-lg-11 col-xl-12 text-center mx-auto" style="margin-bottom: -33px;background: var(--bs-primary-text-emphasis);">
+            <div class="col-md-12 col-lg-11 col-xl-12 text-center mx-auto" style="margin-bottom: -4px;background: var(--bs-primary-text-emphasis);border-radius: 10px;text-align: justify;padding-top: 5px;margin-top: 6px;">
                 <h2 class="text-center text-white" style="margin-bottom: 12px;margin-top: 17px;font-family: Coda, serif;">Empower Your Child’s Potential&nbsp;</h2>
-                <h3 class="text-center text-white" style="font-family: Coda, serif;"><em><span style="color: rgb(89, 154, 251);">Cultivate Character, Competence, and Creativity at Gloria D’ville International School</span></em></h3>
-                <p class="fs-5 w-lg-50" style="text-align: left;">Nestled just moments away from the University of Port Harcourt, lies Gloria D'ville International School, a vibrant learning haven where your child's potential takes flight. Our mission? To nurture well-rounded leaders of tomorrow – grounded in integrity, equipped with competence, and empowered by creativity.&nbsp;Beyond textbooks and exams, we cultivate a dynamic environment that prioritizes your child's well being.</p>
+                <h4 class="text-center text-white" style="font-family: Coda, serif;font-weight: bold;"><em><span style="color: rgb(89, 154, 251);">Cultivate Character, Competence, and Creativity at Gloria D’ville International School</span></em></h4>
+                <p class="fs-5 w-lg-50" style="text-align: center;padding-left: 0px;padding-bottom: 8px;padding-right: 26px;margin-left: 18px;margin-right: 0px;">Gloria D'Ville International School is situated in a tranquil and conducive environment, offering picturesque views of the University of Port Harcourt (Abuja Campus) along the Uniport, Omuokiri - Aluu - Airport Road. Our institution features comprehensive educational offerings, including a crèche, nursery, primary, and secondary school. We proudly implement a hybrid 21st-century curriculum meticulously designed to cultivate future leaders, placing special emphasis on Information Technology, leadership, entrepreneurship, sports, and creativity.</p>
             </div>
         </div>
         <div class="row gy-4 row-cols-1 row-cols-md-2 row-cols-xl-3">
@@ -182,7 +101,7 @@
                             <path d="M14 4C14 3.44772 14.4477 3 15 3H17C17.5523 3 18 3.44772 18 4V16C18 16.5523 17.5523 17 17 17H15C14.4477 17 14 16.5523 14 16V4Z" fill="currentColor"></path>
                         </svg></div>
                     <div class="px-3">
-                        <h4 class="text-white" style="font-family: Coda, serif;">Leadership Mentorship</h4>
+                        <h4 class="text-white" style="font-family: Coda, serif;">Leadership Development</h4>
                         <p>We spark your child's inner leader through engaging programs and real-world opportunities, fostering confidence and a responsible spirit.</p>
                     </div>
                 </div>
@@ -243,36 +162,32 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-12 col-lg-11 col-xl-12 text-center mx-auto" style="margin-bottom: -33px;background: var(--bs-primary-text-emphasis);">
-            <section class="py-4 py-xl-5" style="padding: 5px;margin: 0px;margin-top: 0px;margin-bottom: -155px;">
-                <div class="container">
-                    <div class="text-white bg-primary border rounded border-0 border-primary d-flex flex-column justify-content-between flex-lg-row p-4 p-md-5" style="background: linear-gradient(89deg, #520ee3, #f93333);">
-                        <div class="pb-2 pb-lg-1">
-                            <h2 class="fw-bold mb-2" style="font-size: 30px;font-family: Coda, serif;">Contact us today and schedule a meeting&nbsp;</h2>
-                            <p class="mb-0" style="font-size: 20px;">&nbsp;Discover the Gloria D'ville International School difference, where integrity, competence, and creativity ignite a passion for lifelong learning.</p>
-                        </div>
-                        <div class="my-2"><a class="btn btn-outline-light fs-5 d-block py-2 px-4" role="button" href="#">Schedule</a></div>
-                    </div>
-                </div>
-            </section>
+    </div>
+    <div class="container">
+        <div class="text-white bg-primary border rounded border-0 border-primary d-flex d-sm-flex d-md-flex d-lg-flex d-xl-flex d-xxl-flex flex-column justify-content-between align-items-center align-items-sm-center align-items-md-center flex-lg-row justify-content-lg-center justify-content-xl-center justify-content-xxl-center p-4 p-md-5" style="background: linear-gradient(89deg, #520ee3, #f93333);margin-left: 0px;border-radius: 10px;margin-bottom: -82px;margin-top: 72px;">
+            <div class="pb-2 pb-lg-1">
+                <h2 class="fw-bold mb-2" style="font-size: 30px;font-family: Coda, serif;">Contact us today and schedule a meeting&nbsp;</h2>
+                <p class="mb-0" style="font-size: 20px;text-align: left;padding-right: 0px;margin-right: 1px;">Discover the Gloria D'ville International School difference, where integrity, competence, and creativity ignite a passion for lifelong learning.</p>
+            </div>
+            <div class="my-2"><a class="btn btn-outline-light fs-5 d-block py-2 px-4" role="button" href="#">Schedule</a></div>
         </div>
     </div>
-    <div class="container-fluid pt-5" style="--bs-body-bg: #001f3f;color: #fff;margin-top: 146px;">
+    <div class="container-fluid pt-5" style="--bs-body-bg: #001f3f;color: #fff;margin-top: 78px;">
         <div class="container pb-3">
             <div class="row">
                 <div class="col-xl-6">
-                    <div class="bg-primary shadow-sm d-flex border-top rounded mb-4" style="padding:30px;box-shadow:0px 0px 0px 0px;background-color:#001f3f;color:#fff;">
-                        <div class="pl-4">
-                            <h3 style="color: var(--white);font-family: Coda, serif;">Our Mission</h3>
-                            <p class="m-0"><span>At Gloria D'ville International School, we are dedicated to shaping leaders through immersive education. Our commitment extends to a comprehensive educational experience that nurtures each child's holistic development. With diverse sports programs, extracurricular activities, and dedicated support services, we foster well-rounded individuals equipped with essential life skills. Embracing technology seamlessly, we prepare students for the digital age while instilling a strong sense of social responsibility and community engagement.</span></p>
+                    <div class="bg-primary shadow-sm d-flex border-top rounded mb-4" style="padding: 30px;background-color: #001f3f;color: #fff;box-shadow: 0px 0px;border-radius: 10px;">
+                        <div class="pl-4" style="box-shadow: 0px 0px var(--bs-emphasis-color);">
+                            <h3 style="color: var(--white);font-family: Coda, serif;box-shadow: 0px 0px var(--bs-emphasis-color);">Our Mission</h3>
+                            <p class="m-0" style="box-shadow: 0px 0px var(--bs-emphasis-color);"><span style="box-shadow: 0px 0px var(--bs-emphasis-color);">Our mission is to enlighten the human spirit, stimulate intellectual growth, and channel the inherent gifts and talents of individuals, equipping them to attain global relevance in the rapidly evolving and dynamic landscape of today's world.</span></p>
                         </div>
                     </div>
                 </div>
-                <div class="col-xl-6">
-                    <div class="bg-primary shadow-sm d-flex border-top rounded mb-4" style="padding: 30px;background-color: #001f3f;color: #fff;">
+                <div class="col-xl-6" style="box-shadow: 0px 0px var(--bs-emphasis-color);">
+                    <div class="bg-primary shadow-sm d-flex border-top rounded mb-4" style="padding: 30px;background-color: #001f3f;color: #fff;border-radius: 10px;">
                         <div class="pl-4">
                             <h3 style="color: var(--white);font-family: Coda, serif;">Our Vision</h3>
-                            <p class="m-0"><span>Our vision is to be a leading educational institution in Nigeria, nurturing students who excel academically and are socially responsible, technologically adept, and involved in the community, shaping future leaders who make positive impacts in the world, embodying the values of compassion, civic duty, and personal growth. Through parental involvement and a myriad of learning opportunities, we aim to create a nurturing environment that empowers every student to reach their full potential.</span></p>
+                            <p class="m-0"><span>Our visionary goal is to forge a nation of leaders exemplifying unwavering Christlike character, unparalleled competence, and boundless creativity. We aspire to instill these virtues to create a transformative and impactful legacy.</span></p>
                         </div>
                     </div>
                 </div>
@@ -281,7 +196,7 @@
     </div>
     <div class="container-fluid py-5" style="margin-top: -38px;">
         <div class="container">
-            <div class="row align-items-center" style="background: #052c65;">
+            <div class="row align-items-center" style="background: #052c65;border-radius: 10px;">
                 <div class="col-lg-5"><img class="rounded img-fluid mb-5 mb-lg-0" src="assets/img/School_inside.webp" alt="" style="margin-top: 8px;margin-bottom: 13px;padding-bottom: 14px;"></div>
                 <div class="col-lg-7" style="padding-bottom: 19px;">
                     <h3 class="mb-4" style="padding-top: 17px;margin-top: -13px;font-family: Coda, serif;"><span style="color: rgb(255, 255, 255);">How We Started: From Ideals To Reality</span></h3>
@@ -291,18 +206,6 @@
         </div>
     </div>
     <div class="container py-4 py-xl-5" style="margin-top: -29px;">
-        <div class="theme-switcher dropdown"><button class="btn btn-link dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button" style="color: var(--bs-body-color);"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-sun-fill mb-1">
-                    <path d="M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8M8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0m0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13m8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5M3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8m10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0m-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707M4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"></path>
-                </svg></button>
-            <div class="dropdown-menu"><a class="dropdown-item d-flex align-items-center" href="#" data-bs-theme-value="light"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-sun-fill opacity-50 me-2">
-                        <path d="M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8M8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0m0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13m8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5M3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8m10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0m-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707M4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"></path>
-                    </svg>Light</a><a class="dropdown-item d-flex align-items-center" href="#" data-bs-theme-value="dark"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-moon-stars-fill opacity-50 me-2">
-                        <path d="M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278"></path>
-                        <path d="M10.794 3.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387a1.734 1.734 0 0 0-1.097 1.097l-.387 1.162a.217.217 0 0 1-.412 0l-.387-1.162A1.734 1.734 0 0 0 9.31 6.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387a1.734 1.734 0 0 0 1.097-1.097l.387-1.162zM13.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.156 1.156 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.156 1.156 0 0 0-.732-.732l-.774-.258a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732L13.863.1z"></path>
-                    </svg>Dark</a><a class="dropdown-item d-flex align-items-center" href="#" data-bs-theme-value="auto"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-circle-half opacity-50 me-2">
-                        <path d="M8 15A7 7 0 1 0 8 1zm0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16"></path>
-                    </svg>Auto</a></div>
-        </div>
         <div class="row mb-5">
             <div class="col-md-12 col-lg-12 col-xl-12 text-center mx-auto" style="padding-top: inherit;text-align: center;margin-bottom: -43px;">
                 <h2 style="text-align: center;font-family: Coda, serif;">Our Education Strategy</h2>
@@ -431,7 +334,7 @@
                         <li class="list-inline-item py-2" style="text-align: left;margin-top: -2px;"><i class="fa fa-check text-success mr-3" style="text-align: left;margin-top: -2px;"></i>&nbsp;<strong>Quality Education:</strong> Our curriculum is enriched with modern learning resources to ensure your child receives a well-rounded education.</li>
                         <li class="list-inline-item py-2" style="text-align: left;margin-top: -2px;"><i class="fa fa-check text-success mr-3" style="text-align: left;margin-top: -2px;"></i>&nbsp;<strong>Experienced Educators:</strong> Our team of dedicated professionals is committed to nurturing your child’s intellectual and moral growth.</li>
                         <li class="list-inline-item py-2" style="text-align: left;margin-top: -2px;"><i class="fa fa-check text-success mr-3"></i>&nbsp;<strong>Innovative Learning Environment:</strong> We blend traditional and modern learning techniques to provide a balanced education.</li>
-                        <li class="list-inline-item py-2" style="text-align: left;margin-top: -12px;margin-bottom: -34px;"><strong>Register Your Interest! Join us in molding the leaders of tomorrow. Fill out the form to book a seat for your child/ward in our prestigious institution. Let’s work together in shaping the future!</strong></li>
+                        <li class="list-inline-item py-2" style="text-align: left;margin-top: -12px;margin-bottom: -34px;"><strong>Register Your Interest! Join us in molding the leaders of tomorrow. Fill out the form to save a seat for your child/ward in our prestigious institution. Let’s work together in shaping the future!</strong></li>
                     </ul>
                     <div class="row">
                         <div class="col-xl-11"><a class="btn btn-primary mt-4 py-2 px-4" role="button" href="">Book Now</a></div>
@@ -439,7 +342,7 @@
                 </div>
                 <div class="col-md-12 col-lg-6 col-xl-6 col-xxl-6" style="padding-bottom: 1px;padding-right: 10px;padding-top: 44px;">
                     <div class="card mb-5">
-                        <div class="card-body p-sm-5" style="background: linear-gradient(135deg, #8103ff, #3105b0), #052c65;">
+                        <div class="card-body p-sm-5" style="background: linear-gradient(135deg, #8103ff, #3105b0), #052c65;border-radius: 10px;">
                             <h2 class="text-center mb-4" style="color: var(--bs-body-bg);font-size: 26px;font-family: Coda, serif;">Interested ? Schedule a Meeting</h2>
                             <form method="post">
                                 <div class="mb-3"><input class="form-control" type="text" id="name-1" name="name" placeholder="Name"></div>
